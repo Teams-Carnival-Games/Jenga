@@ -127,7 +127,6 @@ function Jenga() {
             console.log("PLAYERNAME: ", JSON.stringify(playerNamesArray));
           }
 
-          setMessage("Fluid is doing well");
         });
 
 
@@ -181,7 +180,7 @@ return (
     {frameContext === "sidePanel" ? (
       <SidePanel startGame={startGame} />
     ) : (
-      <MeetingStage unityProvider={unityProvider} message={message} />
+      <MeetingStage unityProvider={unityProvider}/>
     )}
   </Fragment>
 );
