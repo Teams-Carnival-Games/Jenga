@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap'); /* Importing a handwritten font */
+
+.side-panel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+    background-image: url('../utils/11.png');
+    background-size: cover;
+    background-repeat: no-repeat;  /* Add this line */
+    background-position: center;  /* Add this line */
+    font-family: 'Patrick Hand', cursive; /* Using the handwritten font */
+}
+
+
+.side-panel-content h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #5a2a03; /* Dark brown color */
+}
+
+.side-panel-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #5a2a03; /* Dark brown color */
+}
+
+.side-panel-content button {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #f4ca8f; /* Light wood color */
+    border: 2px solid #5a2a03; /* Dark brown border */
+    border-radius: 5px;
+    transition: transform 0.2s; /* Animation */
+}
+
+.side-panel-content button:hover {
+    transform: translateY(-5px); /* Button moves up slightly on hover */
+}
