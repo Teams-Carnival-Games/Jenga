@@ -68,9 +68,11 @@ function Jenga() {
   };
 
   function startGame() {
+    FluidService.resetGameState();  // Reset the Fluid container
     setGameStarted(true);
     shareToStage();
 }
+
 
 
   
@@ -108,7 +110,6 @@ function Jenga() {
     app.initialize().then(async () => {
       try {
         await FluidService.connect();
-        FluidService.resetGameState();
         const playername = await FluidService.getPlayerNames();
         console.log("playername!:", playername);
 
@@ -160,7 +161,8 @@ function Jenga() {
         setMessage(`ERROR: ${error.message}`);
       }
     });
-  }, [sendMessage, isLoaded]);
+
+}, [sendMessage, isLoaded]);
 
   useEffect(() => {
     FluidService.onGameStarted(() => {
@@ -180,7 +182,7 @@ return (
     {frameContext === "sidePanel" ? (
       <SidePanel startGame={startGame} />
     ) : (
-      <MeetingStage unityProvider={unityProvider}/>
+      <MeetingStage unityProvider={unityProvider}  />
     )}
   </Fragment>
 );
