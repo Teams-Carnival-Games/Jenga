@@ -67,6 +67,23 @@ function Jenga() {
       }, window.location.origin + "?inTeams=1&view=stage");
   };
 
+
+  useEffect(() => {
+    function handleGlobalError(event) {
+      console.warn("Caught global error:", event.error);
+      return true; // This prevents the default browser error handling
+    }
+  
+    window.addEventListener('error', handleGlobalError);
+  
+    // Cleanup function to remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('error', handleGlobalError);
+    };
+  }, []);
+  
+
+
   function startGame() {
     FluidService.resetGameState();  // Reset the Fluid container
     setGameStarted(true);
@@ -119,8 +136,13 @@ function Jenga() {
             const playerNamesJSON = JSON.stringify({ names: playerNamesArray });
 
             console.log("being sent to unity!:", playerNamesJSON);
-            sendMessage("LobbyManager", "UpdatePlayerList", playerNamesJSON);
-
+            try {
+              sendMessage("LobbyManager", "UpdatePlayerList", playerNamesJSON);
+          } catch (error) {
+              console.warn("Warning: Issue with sending message to Unity:", error);
+          }
+          
+          
             setFluidConnected(true);
             setGameLoaded(true);
           } else {
@@ -140,8 +162,12 @@ function Jenga() {
           console.log("being sent to unity!!!!!:", fluidGameState);
           console.log("being sent to unity!:", JSON.stringify(fluidGameState));
           
-          sendMessage("JengaGameController", "LoadGameState", fluidGameState);
-
+          try {
+            sendMessage("JengaGameController", "LoadGameState", fluidGameState);
+          } catch (error) {
+            console.warn("Warning: Issue with sending message to Unity:", error);
+        }
+        
 
   
           setFluidConnected(true);
